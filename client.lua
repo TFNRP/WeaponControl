@@ -121,7 +121,7 @@ RegisterCommand('safety', function()
       [true]  = 'Safety ~g~on~s~.',
       [false] = 'Safety ~r~off~s~.',
     })[Weapon.Safety])
-    PlaySoundFromEntity(-1, 'Mouse_Click', ped, 'GTAO_Exec_SecuroServ_Warehouse_PC_Sounds', true)
+    PlaySoundFromEntity(-1, 'Faster_Click', ped, 'RESPAWN_ONLINE_SOUNDSET', true)
   end
 end)
 
@@ -138,7 +138,7 @@ RegisterCommand('firingmode', function()
         [Constants.BURST_FIRE] = 'Firing mode ~y~BURST FIRE~s~.',
         [Constants.FULL_AUTO]  = 'Firing mode ~y~FULL-AUTO~s~.',
       })[Weapon.FiringMode])
-      PlaySoundFromEntity(-1, 'Mouse_Click', ped, 'GTAO_Exec_SecuroServ_Warehouse_PC_Sounds', true)
+      PlaySoundFromEntity(-1, 'Faster_Click', ped, 'RESPAWN_ONLINE_SOUNDSET', true)
     end
   end
 end)

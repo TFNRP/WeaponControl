@@ -13,7 +13,7 @@ Weapons = {}
 
 function WeaponStub()
   return {
-    Safety = true,
+    Safety = false,
     FiringMode = 1,
   }
 end

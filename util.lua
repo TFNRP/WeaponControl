@@ -29,6 +29,10 @@ function IsArmed()
   return IsPedArmed(PlayerPedId(), 4)
 end
 
+function PlayClick(ped)
+  PlaySoundFromEntity(-1, 'Faster_Click', ped, 'RESPAWN_ONLINE_SOUNDSET', true)
+end
+
 function ShowNotification(message)
   SetNotificationTextEntry('STRING')
   AddTextComponentSubstringPlayerName(message)

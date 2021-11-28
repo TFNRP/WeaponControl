@@ -23,8 +23,15 @@ Citizen.CreateThread(function()
 
       if Weapon.Safety then
         DisablePlayerFiring(ped, true)
-        if (IsControlPressed(0, 24) or IsDisabledControlPressed(0, 24)) and math.random(1, 5) == 1 then
-          ShowNotification('You attempt to pull the trigger but it doesn\'t retract. (~g~SAFETY~s~)')
+        if IsControlPressed(0, 24) or IsDisabledControlPressed(0, 24) then
+          PlayClick(ped)
+          if math.random(1, 5) == 1 then
+            ShowNotification('You attempt to pull the trigger but it doesn\'t retract. (~g~SAFETY~s~)')
+          end
+          repeat
+            Wait(1)
+            DisablePlayerFiring(ped, true)
+          until not (IsControlPressed(0, 24) or IsDisabledControlPressed(0, 24))
         end
       else
         if IsPedShooting(ped) then
@@ -121,7 +128,7 @@ RegisterCommand('safety', function()
       [true]  = 'Safety ~g~on~s~.',
       [false] = 'Safety ~r~off~s~.',
     })[Weapon.Safety])
-    PlaySoundFromEntity(-1, 'Faster_Click', ped, 'RESPAWN_ONLINE_SOUNDSET', true)
+    PlayClick(ped)
   end
 end)
 
@@ -138,7 +145,7 @@ RegisterCommand('firingmode', function()
         [Constants.BURST_FIRE] = 'Firing mode ~y~BURST FIRE~s~.',
         [Constants.FULL_AUTO]  = 'Firing mode ~y~FULL-AUTO~s~.',
       })[Weapon.FiringMode])
-      PlaySoundFromEntity(-1, 'Faster_Click', ped, 'RESPAWN_ONLINE_SOUNDSET', true)
+      PlayClick(ped)
     end
   end
 end)

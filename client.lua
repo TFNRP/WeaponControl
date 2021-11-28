@@ -28,19 +28,26 @@ Citizen.CreateThread(function()
         end
       else
         if IsPedShooting(ped) then
-          local iter = 2
-          if IsPedSprinting(ped) then
-            iter = iter + 1
-          end
-          CreateThread(function()
-            local last = GetGameplayCamRelativePitch()
-            for _ = 1, iter do
-              local camera = GetGameplayCamRelativePitch()
-              SetGameplayCamRelativePitch(camera - math.abs(camera - last), 1.0)
-              last = camera
-              Wait(1)
+          if not IsPedInAnyVehicle(ped) then
+            local iter = 2
+            if IsPedSprinting(ped) then
+              iter = iter + 1
             end
-          end)
+            CreateThread(function()
+              local last = GetGameplayCamRelativePitch()
+              for _ = 1, iter do
+                local camera = GetGameplayCamRelativePitch()
+                local amount = camera - last
+                if GetFollowPedCamViewMode() == 4 then
+                  amount = -amount
+                end
+                print(amount)
+                SetGameplayCamRelativePitch(camera - amount, 1.0)
+                last = camera
+                Wait(1)
+              end
+            end)
+          end
           if AllowedAuto[GetWeapontypeGroup(weapon)] then
             ({
               function()
